@@ -75,6 +75,30 @@
 
         const handleSubmit = async (event) => {
           event.preventDefault()
+
+          const product = {
+            name: document.getElementById('name').value,
+            description: document.getElementById('description').value,
+            brand: document.getElementById('brand').value,
+            imageUrl: document.getElementById('img-url').value,
+            price: document.getElementById('price').value
+          }
+
+          try {
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              body: JSON.stringify(product),
+              headers: {
+                "Authorization": `Bearer ${apiToken}`,
+                "Content-Type": "application/json",
+              }
+            })
+            console.log(response)
+
+          } catch (err) {
+                console.log(err)
+
+            }
         }
         
 

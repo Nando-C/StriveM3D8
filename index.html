@@ -39,7 +39,7 @@
                     <!-- Product display -->
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
                         <div class="card" style="width: 18rem;">
-                            <img src="https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80" class="card-img-top" alt="...">
+                            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTlplJDPDcl7K04MNiKMFo3bnhKe1x333JPxGaPUTKj1x6WFWA&usqp=CAY" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">Name</h5>
                               <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptates voluptate consequatur? </p>
@@ -49,7 +49,6 @@
                                   <span>Brand</span>
                                   <span class="badge badge-success ml-auto py-2">£ 45</span>
                                 </li>
-                              <!-- <li class="list-group-item">Price</li> -->
                             </ul>
                           </div>
                     </div>
@@ -78,9 +77,31 @@
                         "Authorization": `Bearer ${apiToken}`
                     }
                 })
-                console.log(response)
+                // console.log(response)
                 const products =  await response.json()
                 console.log(products)
+                // if (products.length > 0){
+                    const productDisplay = document.getElementById('products')
+                    
+                    productDisplay.innerHTML = products.map(product => {
+                        ` <div class="col-12 col-sm-6 col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src=${product.imageUrl} class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">${product.name}</h5>
+                              <p class="card-text"> ${product.description}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item d-flex">
+                                  <span>${product.brand}</span>
+                                  <span class="badge badge-success ml-auto py-2">£ ${product.price}</span>
+                                </li>
+                            </ul>
+                          </div>
+                    </div>`
+                        
+                    }).join('');
+                // }
             } catch (err) {
                 console.log(err)
 
